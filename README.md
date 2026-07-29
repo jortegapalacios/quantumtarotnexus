@@ -1,139 +1,68 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Quantum Tarot Nexus</title>
-  <meta name="description" content="Quantum Tarot Nexus: donde la intuición se encuentra con el conocimiento.">
-  <meta name="theme-color" content="#020814">
-  <style>
-    :root {
-      color-scheme: dark;
-      --page-bg: #020814;
-      --focus: #65d7ff;
-    }
+# Quantum Tarot Nexus — Landing
 
-    * {
-      box-sizing: border-box;
-    }
+Esta carpeta está lista para publicarse gratuitamente con GitHub Pages.
 
-    html, body {
-      min-height: 100%;
-      margin: 0;
-      background: var(--page-bg);
-    }
+## 1. Conectar el botón con Genially
 
-    body {
-      display: grid;
-      place-items: center;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+Abre `index.html` con el Bloc de notas.
 
-    .landing {
-      position: relative;
-      width: min(100vw, 1536px);
-      line-height: 0;
-      overflow: hidden;
-      background: #020814;
-    }
+Busca:
 
-    .hero {
-      display: block;
-      width: 100%;
-      height: auto;
-      user-select: none;
-      -webkit-user-drag: none;
-    }
+```js
+const CAMPUS_URL = "PEGA_AQUI_LA_URL_PUBLICA_DE_TU_GENIALLY";
+```
 
-    /*
-      Zona interactiva colocada exactamente sobre el botón
-      “COMENZAR EL VIAJE” que está dibujado en la imagen.
-    */
-    .campus-link {
-      position: absolute;
-      left: 37.7%;
-      top: 53.0%;
-      width: 24.3%;
-      height: 6.4%;
-      border-radius: 12px;
-      cursor: pointer;
-      outline: none;
-      transition: box-shadow 180ms ease, background 180ms ease;
-    }
+Reemplaza el texto por el enlace público de tu Genially. Guarda el archivo.
 
-    .campus-link:hover,
-    .campus-link:focus-visible {
-      background: rgba(55, 198, 255, 0.08);
-      box-shadow:
-        0 0 12px rgba(83, 211, 255, 0.75),
-        0 0 32px rgba(83, 211, 255, 0.45);
-    }
+## 2. Publicarla en GitHub Pages
 
-    .campus-link:focus-visible {
-      outline: 2px solid var(--focus);
-      outline-offset: 4px;
-    }
+1. Crea una cuenta en GitHub si todavía no tienes una.
+2. Crea un repositorio público llamado `quantumtarotnexus`.
+3. Sube:
+   - `index.html`
+   - la carpeta `assets`
+4. En el repositorio, entra a:
+   `Settings > Pages`
+5. En “Build and deployment” selecciona:
+   - Source: `Deploy from a branch`
+   - Branch: `main`
+   - Folder: `/ (root)`
+6. Pulsa `Save`.
 
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
+GitHub generará una dirección parecida a:
+`https://TU-USUARIO.github.io/quantumtarotnexus/`
 
-    @media (max-width: 600px) {
-      body {
-        align-items: start;
-      }
+## 3. Conectar quantumtarotnexus.com desde Porkbun
 
-      .landing {
-        width: 100vw;
-      }
-    }
-  </style>
-</head>
-<body>
-  <main class="landing" aria-label="Quantum Tarot Nexus">
-    <img
-      class="hero"
-      src="assets/quantum-tarot-nexus-hero.png"
-      alt="Quantum Tarot Nexus, una academia para transformar tu mirada, comprender los símbolos y expandir tu conciencia a través del Tarot."
-    >
+Cuando GitHub Pages ya funcione:
 
-    <a
-      id="campusLink"
-      class="campus-link"
-      href="#"
-      aria-label="Comenzar el viaje"
-    >
-      <span class="sr-only">Comenzar el viaje</span>
-    </a>
-  </main>
+### En GitHub
 
-  <script>
-    /*
-      Reemplaza el texto entre comillas por el enlace público de tu Genially.
-      Ejemplo:
-      const CAMPUS_URL = "https://view.genially.com/...";
-    */
-    const CAMPUS_URL = "PEGA_AQUI_LA_URL_PUBLICA_DE_TU_GENIALLY";
+1. Vuelve a `Settings > Pages`.
+2. En “Custom domain” escribe:
+   `quantumtarotnexus.com`
+3. Guarda.
 
-    document.getElementById("campusLink").addEventListener("click", function (event) {
-      if (!CAMPUS_URL.startsWith("https://")) {
-        event.preventDefault();
-        alert("La landing ya funciona. Falta pegar la URL pública de Genially en el archivo index.html.");
-        return;
-      }
+### En Porkbun DNS
 
-      this.href = CAMPUS_URL;
-      this.target = "_blank";
-      this.rel = "noopener noreferrer";
-    });
-  </script>
-</body>
-</html>
+Elimina únicamente los registros web actuales que apunten a `uixie.porkbun.com`
+(ALIAS y CNAME comodín). No elimines los registros MX ni TXT del correo.
+
+Agrega estos cuatro registros `A` para el dominio raíz:
+
+- Host: vacío o `@` — Answer: `185.199.108.153`
+- Host: vacío o `@` — Answer: `185.199.109.153`
+- Host: vacío o `@` — Answer: `185.199.110.153`
+- Host: vacío o `@` — Answer: `185.199.111.153`
+
+Agrega un registro `CNAME`:
+
+- Host: `www`
+- Answer: `TU-USUARIO.github.io`
+
+La propagación puede tardar desde algunos minutos hasta 24 horas.
+
+## Contenido
+
+La landing usa una imagen única en alta resolución y una zona invisible,
+adaptable a cualquier pantalla, sobre el botón “COMENZAR EL VIAJE”.
