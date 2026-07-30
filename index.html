@@ -115,25 +115,5 @@
     </a>
   </main>
 
-  <script>
-    /*
-      Reemplaza el texto entre comillas por el enlace público de tu Genially.
-      Ejemplo:
-      const CAMPUS_URL = "https://view.genially.com/...";
-    */
-    const CAMPUS_URL = "PEGA_AQUI_LA_URL_PUBLICA_DE_TU_GENIALLY";
-
-    document.getElementById("campusLink").addEventListener("click", function (event) {
-      if (!CAMPUS_URL.startsWith("https://")) {
-        event.preventDefault();
-        alert("La landing ya funciona. Falta pegar la URL pública de Genially en el archivo index.html.");
-        return;
-      }
-
-      this.href = CAMPUS_URL;
-      this.target = "_blank";
-      this.rel = "noopener noreferrer";
-    });
-  </script>
-</body>
+ </body>
 </html>
