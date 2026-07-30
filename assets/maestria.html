@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Maestría Quantum Tarot, nivel final de la Academia Quantum Tarot Nexus."
+  >
+
+  <title>Maestría Quantum Tarot | Quantum Tarot Nexus</title>
+
+  <style>
+
+    :root {
+      --fondo: #03051a;
+      --fondo-profundo: #01020b;
+
+      --panel: rgba(8, 10, 35, 0.90);
+      --panel-claro: rgba(20, 26, 64, 0.86);
+
+      --cyan: #54efff;
+      --cyan-claro: #c9fbff;
+
+      --lavanda: #c8b5ff;
+      --violeta: #9e7cff;
+      --morado: #6f4dd8;
+
+      --blanco: #f7fbff;
+      --texto: #eef8ff;
+      --texto-suave: #c3cbe2;
+
+      --borde: rgba(119, 224, 255, 0.38);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+
+      color: var(--texto);
+
+      background:
+        radial-gradient(
+          circle at top,
+          #17245b 0%,
+          #080b28 38%,
+          var(--fondo-profundo) 100%
+        );
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    /* =========================================
+       PORTADA
+    ========================================= */
+
+    .portada {
+      position: relative;
+
+      width: 100%;
+      aspect-ratio: 16 / 9;
+
+      overflow: hidden;
+
+      background: #020516;
+    }
+
+    .portada img {
+      display: block;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
+    }
+
+    /*
+      Zona invisible ubicada sobre el botón
+      "Volver a la Academia" incluido en la imagen.
+    */
+
+    .volver-academia {
+      position: absolute;
+
+      top: 2%;
+      left: 1.2%;
+      z-index: 5;
+
+      display: block;
+
+      width: 15.5%;
+      min-width: 130px;
+      max-width: 260px;
+
+      aspect-ratio: 2.25 / 1;
+
+      border-radius: 14px;
+
+      color: transparent;
+      text-decoration: none;
+
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+    }
+
+    .volver-academia:hover {
+      transform: scale(1.035);
+
+      background:
+        rgba(89, 231, 255, 0.08);
+
+      box-shadow:
+        0 0 20px rgba(77, 225, 255, 0.84),
+        0 0 48px rgba(153, 103, 255, 0.45);
+    }
+
+    .volver-academia:focus-visible {
+      outline:
+        3px solid var(--cyan-claro);
+
+      outline-offset:
+        4px;
+    }
+
+    .explorar {
+      position: absolute;
+
+      left: 50%;
+      bottom: 1.2%;
+      z-index: 5;
+
+      transform:
+        translateX(-50%);
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      padding:
+        11px 22px;
+
+      border:
+        1px solid rgba(164, 239, 255, 0.70);
+
+      border-radius:
+        999px;
+
+      color:
+        var(--blanco);
+
+      background:
+        rgba(4, 8, 33, 0.80);
+
+      backdrop-filter:
+        blur(10px);
+
+      text-decoration:
+        none;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      font-size:
+        0.92rem;
+
+      letter-spacing:
+        0.07em;
+
+      box-shadow:
+        0 0 18px rgba(64, 220, 255, 0.34),
+        0 0 28px rgba(131, 91, 255, 0.18),
+        inset 0 0 20px rgba(75, 219, 255, 0.08);
+
+      animation:
+        flotar 2.4s ease-in-out infinite;
+    }
+
+    .explorar:hover {
+      border-color:
+        var(--cyan-claro);
+
+      box-shadow:
+        0 0 28px rgba(63, 225, 255, 0.65),
+        0 0 55px rgba(153, 103, 255, 0.35);
+    }
+
+    @keyframes flotar {
+
+      0%,
+      100% {
+        transform:
+          translate(-50%, 0);
+      }
+
+      50% {
+        transform:
+          translate(-50%, -7px);
+      }
+    }
+
+    /* =========================================
+       CONTENIDO
+    ========================================= */
+
+    .contenido {
+      position: relative;
+
+      padding:
+        84px 24px 112px;
+    }
+
+    .contenido::before {
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      pointer-events: none;
+
+      background:
+        radial-gradient(
+          circle at 50% 8%,
+          rgba(83, 226, 255, 0.16),
+          transparent 30%
+        ),
+
+        radial-gradient(
+          circle at 14% 42%,
+          rgba(141, 101, 255, 0.15),
+          transparent 26%
+        ),
+
+        radial-gradient(
+          circle at 87% 46%,
+          rgba(209, 181, 255, 0.12),
+          transparent 27%
+        );
+    }
+
+    .contenedor {
+      position: relative;
+      z-index: 1;
+
+      width:
+        min(1180px, 100%);
+
+      margin:
+        0 auto;
+    }
+
+    /* =========================================
+       INTRODUCCIÓN
+    ========================================= */
+
+    .introduccion {
+      max-width: 920px;
+
+      margin:
+        0 auto 58px;
+
+      text-align:
+        center;
+    }
+
+    .nivel {
+      margin:
+        0 0 12px;
+
+      color:
+        var(--cyan-claro);
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      font-size:
+        0.85rem;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        0.24em;
+
+      text-transform:
+        uppercase;
+    }
+
+    .introduccion h1 {
+      margin: 0;
+
+      color:
+        var(--blanco);
+
+      font-size:
+        clamp(2.4rem, 5vw, 4.8rem);
+
+      font-weight:
+        400;
+
+      letter-spacing:
+        0.06em;
+
+      text-shadow:
+        0 0 17px rgba(86, 229, 255, 0.40),
+        0 0 35px rgba(157, 108, 255, 0.22);
+    }
+
+    .subtitulo {
+      margin:
+        8px 0 0;
+
+      color:
+        var(--lavanda);
+
+      font-size:
+        clamp(1.2rem, 2.5vw, 2rem);
+
+      font-weight:
+        400;
+
+      letter-spacing:
+        0.06em;
+    }
+
+    .linea {
+      width: 200px;
+      height: 1px;
+
+      margin:
+        27px auto;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          var(--cyan),
+          var(--lavanda),
+          var(--violeta),
+          transparent
+        );
+    }
+
+    .frase {
+      margin:
+        22px auto 24px;
+
+      color:
+        var(--lavanda);
+
+      font-size:
+        clamp(1.05rem, 2vw, 1.45rem);
+
+      font-style:
+        italic;
+
+      line-height:
+        1.65;
+    }
+
+    .descripcion {
+      margin:
+        0 auto;
+
+      color:
+        var(--texto-suave);
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      font-size:
+        1.08rem;
+
+      line-height:
+        1.82;
+    }
+
+    /* =========================================
+       PANELES
+    ========================================= */
+
+    .rejilla {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap:
+        26px;
+    }
+
+    .panel {
+      position: relative;
+
+      overflow: hidden;
+
+      padding:
+        32px;
+
+      border:
+        1px solid var(--borde);
+
+      border-radius:
+        20px;
+
+      background:
+        linear-gradient(
+          145deg,
+          var(--panel-claro),
+          var(--panel)
+        );
+
+      backdrop-filter:
+        blur(17px);
+
+      box-shadow:
+        0 18px 52px rgba(0, 0, 0, 0.44),
+        0 0 28px rgba(74, 200, 255, 0.05),
+        inset 0 0 28px rgba(143, 104, 255, 0.05);
+
+      transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+    }
+
+    .panel::before {
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      left: 10%;
+
+      width: 80%;
+      height: 1px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          var(--cyan-claro),
+          var(--lavanda),
+          var(--violeta),
+          transparent
+        );
+    }
+
+    .panel:hover {
+      transform:
+        translateY(-5px);
+
+      border-color:
+        rgba(156, 238, 255, 0.76);
+
+      box-shadow:
+        0 24px 60px rgba(0, 0, 0, 0.52),
+        0 0 30px rgba(75, 215, 255, 0.19),
+        0 0 50px rgba(143, 103, 255, 0.11);
+    }
+
+    .panel h2 {
+      margin:
+        0 0 22px;
+
+      color:
+        var(--lavanda);
+
+      font-size:
+        1.55rem;
+
+      font-weight:
+        400;
+
+      letter-spacing:
+        0.05em;
+    }
+
+    .lista {
+      display: grid;
+
+      gap:
+        16px;
+
+      margin: 0;
+      padding: 0;
+
+      list-style:
+        none;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+    }
+
+    .lista li {
+      position: relative;
+
+      padding-left:
+        30px;
+
+      color:
+        var(--texto-suave);
+
+      line-height:
+        1.56;
+    }
+
+    .lista li::before {
+      content: "✧";
+
+      position: absolute;
+
+      top: 0;
+      left: 0;
+
+      color:
+        var(--cyan);
+
+      text-shadow:
+        0 0 12px rgba(75, 229, 255, 0.90),
+        0 0 20px rgba(153, 103, 255, 0.40);
+    }
+
+    /* =========================================
+       PROGRAMA
+    ========================================= */
+
+    .programa {
+      grid-column:
+        1 / -1;
+    }
+
+    .modulos {
+      display: grid;
+
+      grid-template-columns:
+        repeat(5, minmax(0, 1fr));
+
+      gap:
+        16px;
+    }
+
+    .modulo {
+      min-height:
+        225px;
+
+      padding:
+        22px 17px;
+
+      border:
+        1px solid rgba(113, 222, 255, 0.30);
+
+      border-radius:
+        15px;
+
+      text-align:
+        center;
+
+      background:
+        rgba(7, 11, 40, 0.64);
+
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .modulo:hover {
+      transform:
+        translateY(-6px);
+
+      border-color:
+        var(--cyan);
+
+      background:
+        rgba(23, 26, 67, 0.86);
+
+      box-shadow:
+        0 0 25px rgba(75, 220, 255, 0.13);
+    }
+
+    .numero {
+      display: grid;
+
+      place-items:
+        center;
+
+      width: 44px;
+      height: 44px;
+
+      margin:
+        0 auto 16px;
+
+      border:
+        1px solid var(--cyan);
+
+      border-radius:
+        50%;
+
+      color:
+        var(--cyan-claro);
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      font-size:
+        0.9rem;
+
+      box-shadow:
+        0 0 16px rgba(75, 226, 255, 0.30),
+        0 0 28px rgba(151, 104, 255, 0.14),
+        inset 0 0 12px rgba(75, 226, 255, 0.10);
+    }
+
+    .modulo h3 {
+      margin:
+        0 0 10px;
+
+      color:
+        var(--blanco);
+
+      font-size:
+        1rem;
+
+      font-weight:
+        400;
+
+      line-height:
+        1.42;
+    }
+
+    .modulo p {
+      margin: 0;
+
+      color:
+        var(--texto-suave);
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      font-size:
+        0.82rem;
+
+      line-height:
+        1.5;
+    }
+
+    /* =========================================
+       INFORMACIÓN
+    ========================================= */
+
+    .datos {
+      display: grid;
+
+      gap:
+        14px;
+
+      margin: 0;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+    }
+
+    .dato {
+      display: flex;
+
+      justify-content:
+        space-between;
+
+      gap:
+        20px;
+
+      padding-bottom:
+        12px;
+
+      border-bottom:
+        1px solid rgba(127, 215, 255, 0.16);
+    }
+
+    .dato span:first-child {
+      color:
+        var(--texto-suave);
+    }
+
+    .dato span:last-child {
+      color:
+        var(--cyan-claro);
+
+      text-align:
+        right;
+    }
+
+    .profesor p {
+      margin:
+        0 0 14px;
+
+      color:
+        var(--texto-suave);
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      line-height:
+        1.72;
+    }
+
+    .profesor strong {
+      color:
+        var(--blanco);
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:
+        1.18rem;
+
+      font-weight:
+        400;
+    }
+
+    /* =========================================
+       BOTÓN FINAL
+    ========================================= */
+
+    .entrada {
+      margin-top:
+        58px;
+
+      text-align:
+        center;
+    }
+
+    .entrada h2 {
+      margin-bottom:
+        14px;
+
+      color:
+        var(--lavanda);
+
+      font-size:
+        2rem;
+
+      font-weight:
+        400;
+    }
+
+    .entrada p {
+      max-width:
+        780px;
+
+      margin:
+        0 auto 25px;
+
+      color:
+        var(--texto-suave);
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      line-height:
+        1.75;
+    }
+
+    .boton-curso {
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      gap:
+        12px;
+
+      min-width:
+        330px;
+
+      padding:
+        18px 34px;
+
+      border:
+        1px solid var(--cyan-claro);
+
+      border-radius:
+        13px;
+
+      color:
+        #ffffff;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(33, 170, 213, 0.96),
+          rgba(93, 69, 193, 0.97),
+          rgba(121, 72, 190, 0.97)
+        );
+
+      text-decoration:
+        none;
+
+      font-size:
+        1.04rem;
+
+      letter-spacing:
+        0.08em;
+
+      text-transform:
+        uppercase;
+
+      box-shadow:
+        0 0 24px rgba(82, 224, 255, 0.44),
+        0 0 42px rgba(151, 100, 255, 0.30),
+        inset 0 0 22px rgba(255, 255, 255, 0.10);
+
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+    }
+
+    .boton-curso:hover {
+      transform:
+        translateY(-4px)
+        scale(1.02);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(62, 207, 237, 0.98),
+          rgba(115, 91, 221, 0.98),
+          rgba(156, 93, 220, 0.98)
+        );
+
+      box-shadow:
+        0 0 34px rgba(81, 231, 255, 0.68),
+        0 0 64px rgba(151, 99, 255, 0.42);
+    }
+
+    .boton-curso:focus-visible {
+      outline:
+        3px solid var(--lavanda);
+
+      outline-offset:
+        5px;
+    }
+
+    .nota {
+      margin-top:
+        14px !important;
+
+      color:
+        #8c98bd !important;
+
+      font-size:
+        0.84rem;
+    }
+
+    /* =========================================
+       PIE
+    ========================================= */
+
+    footer {
+      padding:
+        26px 20px;
+
+      border-top:
+        1px solid rgba(119, 212, 255, 0.15);
+
+      color:
+        #8490b0;
+
+      background:
+        #01020b;
+
+      text-align:
+        center;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      font-size:
+        0.86rem;
+    }
+
+    footer a {
+      color:
+        var(--cyan-claro);
+
+      text-decoration:
+        none;
+    }
+
+    footer a:hover {
+      text-decoration:
+        underline;
+    }
+
+    /* =========================================
+       TABLET
+    ========================================= */
+
+    @media (max-width: 950px) {
+
+      .rejilla {
+        grid-template-columns:
+          1fr;
+      }
+
+      .programa {
+        grid-column:
+          auto;
+      }
+
+      .modulos {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+      .volver-academia {
+        width: 15%;
+        min-width: 105px;
+      }
+    }
+
+    /* =========================================
+       CELULAR
+    ========================================= */
+
+    @media (max-width: 600px) {
+
+      .volver-academia {
+        min-width:
+          78px;
+      }
+
+      .explorar {
+        bottom:
+          0.6%;
+
+        padding:
+          7px 11px;
+
+        font-size:
+          0.60rem;
+      }
+
+      .contenido {
+        padding:
+          62px 16px 82px;
+      }
+
+      .panel {
+        padding:
+          24px 20px;
+      }
+
+      .modulos {
+        grid-template-columns:
+          1fr;
+      }
+
+      .dato {
+        flex-direction:
+          column;
+
+        gap:
+          5px;
+      }
+
+      .dato span:last-child {
+        text-align:
+          left;
+      }
+
+      .boton-curso {
+        width:
+          100%;
+
+        min-width:
+          0;
+
+        padding:
+          17px 18px;
+
+        font-size:
+          0.90rem;
+      }
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- ======================================
+       PORTADA
+  ======================================= -->
+
+  <header class="portada">
+
+    <img
+      src="maestria_quantum_tarot.png"
+      alt="Portal cuántico luminoso de la Maestría Quantum Tarot"
+    >
+
+    <a
+      class="volver-academia"
+      href="academia.html"
+      aria-label="Volver a la Academia"
+    >
+      Volver a la Academia
+    </a>
+
+    <a
+      class="explorar"
+      href="#informacion"
+    >
+      Explorar la maestría
+
+      <span aria-hidden="true">
+        ↓
+      </span>
+    </a>
+
+  </header>
+
+  <!-- ======================================
+       CONTENIDO
+  ======================================= -->
+
+  <main
+    id="informacion"
+    class="contenido"
+  >
+
+    <div class="contenedor">
+
+      <!-- INTRODUCCIÓN -->
+
+      <section class="introduccion">
+
+        <p class="nivel">
+          Nivel 7 de 7
+        </p>
+
+        <h1>
+          Maestría Quantum Tarot
+        </h1>
+
+        <p class="subtitulo">
+          El umbral hacia una nueva comprensión
+        </p>
+
+        <div class="linea"></div>
+
+        <p class="frase">
+          «Cuando la conciencia transforma la mirada,
+          el Tarot deja de mostrar solamente cartas
+          y comienza a revelar posibilidades».
+        </p>
+
+        <p class="descripcion">
+          Has recorrido cada espacio de la Academia.
+          Aprendiste el lenguaje del Tarot, comprendiste
+          sus símbolos, desarrollaste el arte de la lectura
+          y asumiste la responsabilidad profesional.
+          Ahora llegas al Portal Cuántico: un espacio
+          de integración donde Tarot, conciencia,
+          percepción, intuición y pensamiento científico
+          dialogan para construir una visión más profunda
+          de la experiencia humana.
+        </p>
+
+      </section>
+
+      <div class="rejilla">
+
+        <!-- APRENDIZAJES -->
+
+        <section class="panel">
+
+          <h2>
+            ¿Qué aprenderás?
+          </h2>
+
+          <ul class="lista">
+
+            <li>
+              Integrar el Tarot con una visión
+              contemporánea de la conciencia.
+            </li>
+
+            <li>
+              Comprender la observación como parte
+              activa del proceso interpretativo.
+            </li>
+
+            <li>
+              Explorar los vínculos entre símbolo,
+              percepción, intención y significado.
+            </li>
+
+            <li>
+              Desarrollar lecturas más profundas,
+              abiertas y multidimensionales.
+            </li>
+
+            <li>
+              Reconocer patrones, posibilidades
+              y escenarios emergentes.
+            </li>
+
+            <li>
+              Diferenciar el pensamiento simbólico
+              de las afirmaciones científicas.
+            </li>
+
+            <li>
+              Diseñar un método personal
+              de lectura Quantum Tarot.
+            </li>
+
+            <li>
+              Integrar conocimiento, intuición,
+              ética y acompañamiento consciente.
+            </li>
+
+          </ul>
+
+        </section>
+
+        <!-- RECURSOS -->
+
+        <section class="panel">
+
+          <h2>
+            Recursos de la maestría
+          </h2>
+
+          <ul class="lista">
+
+            <li>
+              Lecciones interactivas avanzadas.
+            </li>
+
+            <li>
+              Mapas de integración conceptual.
+            </li>
+
+            <li>
+              Casos de lectura multidimensional.
+            </li>
+
+            <li>
+              Ejercicios de percepción simbólica.
+            </li>
+
+            <li>
+              Cuaderno de investigación personal.
+            </li>
+
+            <li>
+              Laboratorios de interpretación.
+            </li>
+
+            <li>
+              Protocolos de lectura Quantum Tarot.
+            </li>
+
+            <li>
+              Proyecto final de maestría.
+            </li>
+
+          </ul>
+
+        </section>
+
+        <!-- PROGRAMA -->
+
+        <section class="panel programa">
+
+          <h2>
+            Programa de la maestría
+          </h2>
+
+          <div class="modulos">
+
+            <article class="modulo">
+
+              <div class="numero">
+                01
+              </div>
+
+              <h3>
+                El paradigma cuántico
+              </h3>
+
+              <p>
+                Posibilidad, incertidumbre,
+                observación, relaciones
+                y pensamiento sistémico.
+              </p>
+
+            </article>
+
+            <article class="modulo">
+
+              <div class="numero">
+                02
+              </div>
+
+              <h3>
+                Conciencia y percepción
+              </h3>
+
+              <p>
+                Cómo la atención, la experiencia
+                y la intención intervienen
+                en la interpretación.
+              </p>
+
+            </article>
+
+            <article class="modulo">
+
+              <div class="numero">
+                03
+              </div>
+
+              <h3>
+                El campo simbólico
+              </h3>
+
+              <p>
+                Símbolos, arquetipos, resonancias,
+                conexiones y construcción
+                de significado.
+              </p>
+
+            </article>
+
+            <article class="modulo">
+
+              <div class="numero">
+                04
+              </div>
+
+              <h3>
+                Lectura multidimensional
+              </h3>
+
+              <p>
+                Integración de cartas, niveles,
+                escenarios, tiempos
+                y posibilidades.
+              </p>
+
+            </article>
+
+            <article class="modulo">
+
+              <div class="numero">
+                05
+              </div>
+
+              <h3>
+                Método Quantum Tarot
+              </h3>
+
+              <p>
+                Construcción de un sistema personal,
+                consciente, ético
+                y profesional.
+              </p>
+
+            </article>
+
+          </div>
+
+        </section>
+
+        <!-- GUÍA -->
+
+        <section class="panel profesor">
+
+          <h2>
+            Tu guía en el Portal
+          </h2>
+
+          <p>
+            <strong>
+              José Gabriel Ortega
+            </strong>
+          </p>
+
+          <p>
+            Biólogo, docente universitario
+            y lector de Tarot con más de quince
+            años de experiencia.
+          </p>
+
+          <p>
+            Fundador de Quantum Tarot Nexus,
+            una propuesta que integra pensamiento
+            simbólico, reflexión, intuición,
+            conciencia y acompañamiento responsable.
+          </p>
+
+          <p>
+            «Quantum Tarot no busca disfrazar
+            el Tarot de ciencia. Propone utilizar
+            las ideas de posibilidad, relación
+            e incertidumbre como una nueva manera
+            de pensar la lectura y la experiencia humana».
+          </p>
+
+        </section>
+
+        <!-- INFORMACIÓN -->
+
+        <section class="panel">
+
+          <h2>
+            Información de la maestría
+          </h2>
+
+          <div class="datos">
+
+            <div class="dato">
+              <span>Nivel</span>
+              <span>Maestría</span>
+            </div>
+
+            <div class="dato">
+              <span>Duración</span>
+              <span>24 horas de estudio</span>
+            </div>
+
+            <div class="dato">
+              <span>Modalidad</span>
+              <span>100 % virtual</span>
+            </div>
+
+            <div class="dato">
+              <span>Acceso</span>
+              <span>Permanente</span>
+            </div>
+
+            <div class="dato">
+              <span>Formato</span>
+              <span>Interactivo</span>
+            </div>
+
+            <div class="dato">
+              <span>Evaluación</span>
+              <span>Proyecto final Quantum Tarot</span>
+            </div>
+
+            <div class="dato">
+              <span>Requisito</span>
+              <span>Haber culminado La Logia</span>
+            </div>
+
+            <div class="dato">
+              <span>Progreso</span>
+              <span>5 módulos</span>
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+      <!-- ACCESO FINAL -->
+
+      <section class="entrada">
+
+        <h2>
+          Cruza el Portal Cuántico
+        </h2>
+
+        <p>
+          Este es el último nivel de la Academia,
+          pero no el final del camino. Al atravesar
+          este umbral comenzarás a construir una forma
+          propia de comprender, interpretar y acompañar
+          mediante el Tarot.
+        </p>
+
+        <!--
+          Reemplaza # por el enlace real
+          de la maestría cuando esté publicada.
+        -->
+
+        <a
+          class="boton-curso"
+          href="#"
+          aria-label="Ingresar a la Maestría Quantum Tarot"
+        >
+          ✧ Cruzar el Portal Cuántico
+        </a>
+
+        <p class="nota">
+          El enlace se incorporará cuando
+          la maestría esté publicada.
+        </p>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- PIE -->
+
+  <footer>
+
+    Quantum Tarot Nexus ·
+
+    <a href="academia.html">
+      Volver a la Academia
+    </a>
+
+  </footer>
+
+</body>
+
+</html>
