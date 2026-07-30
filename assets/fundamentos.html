@@ -20,15 +20,16 @@
     }
 
     .escena {
-      position: relative;
-      width: 100%;
-      min-height: 100vh;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
 
-      background-image: url("biblioteca_fundamentos.png");
-      background-size: cover;
-      background-position: center top;
-      background-repeat: no-repeat;
-    }
+  background-image: url("biblioteca_fundamentos.png");
+  background-size: contain;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-color: #020814;
+}
 
     .volver-academia {
       position: absolute;
@@ -66,19 +67,13 @@
     }
 
     @media (max-width: 900px) {
-      .escena {
-        min-height: 56.25vw;
-        background-size: contain;
-        background-position: center top;
-      }
-
-      .volver-academia {
-        top: 2%;
-        left: 1.5%;
-        width: 18%;
-        min-width: 110px;
-      }
-    }
+  .volver-academia {
+    top: 2%;
+    left: 1.5%;
+    width: 18%;
+    min-width: 110px;
+  }
+}
   </style>
 </head>
 
