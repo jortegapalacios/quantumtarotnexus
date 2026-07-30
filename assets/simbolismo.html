@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Observatorio de Simbolismo y Arquetipos de Quantum Tarot Nexus."
+  >
+
+  <title>Simbolismo y Arquetipos | Quantum Tarot Nexus</title>
+
+  <style>
+    :root {
+      --fondo: #020713;
+      --azul: #4ad8ff;
+      --azul-claro: #b9efff;
+      --dorado: #d8b56a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      min-height: 100%;
+      background: var(--fondo);
+    }
+
+    body {
+      overflow-x: hidden;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    /* ==============================================
+       ESCENARIO PRINCIPAL
+    ============================================== */
+
+    .escenario {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background: var(--fondo);
+      overflow: hidden;
+    }
+
+    .imagen-observatorio {
+      display: block;
+      width: 100%;
+      height: auto;
+      min-height: 100vh;
+      object-fit: contain;
+      object-position: top center;
+    }
+
+    /* ==============================================
+       BOTÓN INVISIBLE SOBRE LA IMAGEN
+
+       El diseño del botón ya está integrado en la
+       ilustración. Este enlace transparente convierte
+       esa zona en un botón real.
+    ============================================== */
+
+    .volver-academia {
+      position: absolute;
+      z-index: 10;
+
+      left: 1.7%;
+      top: 2.5%;
+      width: 15.5%;
+      height: 10.5%;
+
+      display: block;
+
+      border: 1px solid transparent;
+      border-radius: 12px;
+
+      color: transparent;
+      text-decoration: none;
+
+      cursor: pointer;
+
+      transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .volver-academia:hover {
+      transform: scale(1.035);
+
+      background: rgba(61, 201, 255, 0.06);
+      border-color: rgba(156, 231, 255, 0.48);
+
+      box-shadow:
+        0 0 12px rgba(79, 210, 255, 0.68),
+        0 0 30px rgba(56, 177, 255, 0.35),
+        inset 0 0 16px rgba(97, 218, 255, 0.12);
+    }
+
+    .volver-academia:focus-visible {
+      outline: 3px solid var(--azul-claro);
+      outline-offset: 4px;
+    }
+
+    /* ==============================================
+       PORTAL HACIA LAS LECCIONES
+
+       Este botón aparecerá en la parte inferior.
+       Más adelante podrá abrir el contenido completo
+       del curso.
+    ============================================== */
+
+    .entrada-curso {
+      position: absolute;
+      z-index: 10;
+
+      left: 50%;
+      bottom: 4%;
+
+      transform: translateX(-50%);
+
+      padding: 13px 30px;
+
+      color: #f7e4b5;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(7, 25, 49, 0.94),
+          rgba(2, 10, 24, 0.96)
+        );
+
+      border: 1px solid rgba(219, 184, 105, 0.78);
+      border-radius: 8px;
+
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: clamp(0.72rem, 1vw, 0.98rem);
+
+      box-shadow:
+        0 0 12px rgba(214, 181, 108, 0.18),
+        0 8px 24px rgba(0, 0, 0, 0.45);
+
+      cursor: pointer;
+
+      transition:
+        transform 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .entrada-curso:hover {
+      transform: translateX(-50%) translateY(-3px);
+
+      color: #ffffff;
+      border-color: rgba(139, 227, 255, 0.9);
+
+      box-shadow:
+        0 0 14px rgba(74, 216, 255, 0.65),
+        0 0 34px rgba(47, 168, 255, 0.32),
+        0 10px 26px rgba(0, 0, 0, 0.55);
+    }
+
+    .entrada-curso:focus-visible {
+      outline: 3px solid var(--azul-claro);
+      outline-offset: 4px;
+    }
+
+    /* ==============================================
+       AVISO TEMPORAL
+    ============================================== */
+
+    .aviso {
+      position: fixed;
+      left: 50%;
+      bottom: 30px;
+      z-index: 1000;
+
+      width: min(440px, calc(100% - 32px));
+      padding: 18px 22px;
+
+      color: #eefaff;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(5, 24, 47, 0.98),
+          rgba(1, 9, 22, 0.98)
+        );
+
+      border: 1px solid rgba(104, 219, 255, 0.62);
+      border-radius: 14px;
+
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.96rem;
+      line-height: 1.5;
+
+      box-shadow:
+        0 0 22px rgba(52, 199, 255, 0.34),
+        0 14px 45px rgba(0, 0, 0, 0.5);
+
+      opacity: 0;
+      pointer-events: none;
+
+      transform: translate(-50%, 24px);
+
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .aviso.visible {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .aviso strong {
+      display: block;
+      margin-bottom: 5px;
+
+      color: var(--dorado);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.08rem;
+      font-weight: 400;
+    }
+
+    /* ==============================================
+       ADAPTACIÓN A PANTALLAS PEQUEÑAS
+    ============================================== */
+
+    @media (max-width: 700px) {
+      .escenario {
+        min-height: auto;
+      }
+
+      .imagen-observatorio {
+        min-height: auto;
+        object-fit: contain;
+      }
+
+      .volver-academia {
+        left: 1.5%;
+        top: 2%;
+        width: 17%;
+        height: 11%;
+        border-radius: 7px;
+      }
+
+      .entrada-curso {
+        bottom: 3%;
+        padding: 9px 18px;
+        letter-spacing: 0.08em;
+      }
+
+      .aviso {
+        bottom: 16px;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main
+    class="escenario"
+    aria-label="Observatorio de Simbolismo y Arquetipos"
+  >
+
+    <img
+      class="imagen-observatorio"
+      src="observatorio_simbolismo.png"
+      alt="Observatorio telescópico de Simbolismo y Arquetipos de Quantum Tarot Nexus"
+    >
+
+    <!-- Botón situado sobre el botón dibujado en la imagen -->
+    <a
+      class="volver-academia"
+      href="academia.html"
+      aria-label="Volver a la Academia">
+      Volver a la Academia
+    </a>
+
+    <!-- Botón temporal hasta construir las lecciones -->
+    <a
+      id="entradaCurso"
+      class="entrada-curso"
+      href="#"
+      aria-label="Comenzar el curso de Simbolismo y Arquetipos">
+      Iniciar exploración
+    </a>
+
+  </main>
+
+  <div
+    id="aviso"
+    class="aviso"
+    role="status"
+    aria-live="polite"
+  >
+    <strong>Simbolismo y Arquetipos</strong>
+    Las salas de aprendizaje del observatorio se encuentran en preparación.
+  </div>
+
+  <script>
+    const entradaCurso = document.getElementById("entradaCurso");
+    const aviso = document.getElementById("aviso");
+
+    let temporizador;
+
+    entradaCurso.addEventListener("click", function (evento) {
+      evento.preventDefault();
+
+      aviso.classList.add("visible");
+
+      clearTimeout(temporizador);
+
+      temporizador = setTimeout(function () {
+        aviso.classList.remove("visible");
+      }, 3200);
+    });
+  </script>
+
+</body>
+</html>
