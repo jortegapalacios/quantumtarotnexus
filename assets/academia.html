@@ -1,37 +1,363 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
 
-<title>Academia | Quantum Tarot Nexus</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<style>
+  <meta
+    name="description"
+    content="Mapa interactivo de la Academia Quantum Tarot Nexus."
+  >
 
-body{
-margin:0;
-background:#05070d;
-display:flex;
-justify-content:center;
-align-items:center;
-min-height:100vh;
-}
+  <title>Academia | Quantum Tarot Nexus</title>
 
-img{
-width:95%;
-max-width:1700px;
-height:auto;
-box-shadow:0 0 40px rgba(0,0,0,.7);
-}
+  <style>
+    :root {
+      --fondo: #020814;
+      --azul: #47d7ff;
+      --azul-claro: #b7efff;
+      --dorado: #d6b56c;
+      --texto: #eefaff;
+    }
 
-</style>
+    * {
+      box-sizing: border-box;
+    }
 
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--fondo);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    /* ==================================================
+       MAPA DE LA ACADEMIA
+    ================================================== */
+
+    .mapa-academia {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #020814;
+    }
+
+    .mapa-academia img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* ==================================================
+       ZONAS INTERACTIVAS
+    ================================================== */
+
+    .zona-curso {
+      position: absolute;
+      z-index: 10;
+      display: block;
+
+      color: transparent;
+      text-decoration: none;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      cursor: pointer;
+
+      transition:
+        transform 0.25s ease,
+        background 0.25s ease,
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .zona-curso:hover {
+      transform: scale(1.06);
+
+      background: rgba(50, 199, 255, 0.09);
+      border-color: rgba(153, 233, 255, 0.65);
+
+      box-shadow:
+        0 0 14px rgba(77, 218, 255, 0.95),
+        0 0 38px rgba(46, 184, 255, 0.58),
+        inset 0 0 18px rgba(89, 224, 255, 0.18);
+    }
+
+    .zona-curso:focus-visible {
+      outline: 3px solid var(--azul-claro);
+      outline-offset: 4px;
+    }
+
+    /* ==================================================
+       POSICIÓN DE LOS SIETE BOTONES
+       Las medidas están expresadas en porcentajes para que
+       se adapten a diferentes tamaños de pantalla.
+    ================================================== */
+
+    /* 1. Fundamentos del Tarot */
+    .fundamentos {
+      left: 5.1%;
+      top: 84.1%;
+      width: 12.5%;
+      height: 11.8%;
+    }
+
+    /* 2. Simbolismo y Arquetipos */
+    .simbolismo {
+      left: 21.6%;
+      top: 23.2%;
+      width: 13.8%;
+      height: 11.5%;
+    }
+
+    /* 3. Arcanos Mayores */
+    .mayores {
+      left: 42.3%;
+      top: 44.4%;
+      width: 12.4%;
+      height: 11.9%;
+    }
+
+    /* 4. Arcanos Menores */
+    .menores {
+      left: 59.0%;
+      top: 23.0%;
+      width: 12.0%;
+      height: 11.3%;
+    }
+
+    /* 5. El Arte de la Lectura */
+    .lectura {
+      left: 56.9%;
+      top: 84.0%;
+      width: 12.4%;
+      height: 12.0%;
+    }
+
+    /* 6. Tarot Profesional */
+    .profesional {
+      left: 78.8%;
+      top: 82.0%;
+      width: 12.6%;
+      height: 12.4%;
+    }
+
+    /* 7. Maestría Quantum Tarot */
+    .maestria {
+      left: 86.4%;
+      top: 34.0%;
+      width: 12.2%;
+      height: 12.2%;
+    }
+
+    /* ==================================================
+       MENSAJE "PRÓXIMAMENTE"
+    ================================================== */
+
+    .aviso {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      z-index: 1000;
+
+      width: min(430px, calc(100% - 32px));
+      padding: 18px 22px;
+
+      color: var(--texto);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(5, 24, 47, 0.97),
+          rgba(1, 10, 24, 0.97)
+        );
+
+      border: 1px solid rgba(104, 219, 255, 0.62);
+      border-radius: 14px;
+
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.98rem;
+      line-height: 1.5;
+
+      box-shadow:
+        0 0 22px rgba(52, 199, 255, 0.35),
+        0 14px 45px rgba(0, 0, 0, 0.48);
+
+      opacity: 0;
+      pointer-events: none;
+
+      transform: translate(-50%, 25px);
+
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s ease;
+    }
+
+    .aviso.visible {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .aviso strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--dorado);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+
+    /* ==================================================
+       ADAPTACIÓN A MÓVILES
+    ================================================== */
+
+    @media (max-width: 700px) {
+      .zona-curso {
+        border-radius: 8px;
+      }
+
+      .aviso {
+        bottom: 16px;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<img src="Mapa_academia_2.png"?v=2" alt="Mapa de la Academia Quantum Tarot Nexus">
+  <main
+    class="mapa-academia"
+    aria-label="Mapa interactivo de la Academia Quantum Tarot Nexus"
+  >
+
+    <img
+      src="Mapa_academia_2.png"
+      alt="Academia Quantum Tarot Nexus con siete niveles de aprendizaje"
+    >
+
+    <!-- 1. FUNDAMENTOS: ACTIVO -->
+    <a
+      class="zona-curso fundamentos"
+      href="fundamentos.html"
+      aria-label="Entrar a Fundamentos del Tarot">
+      Fundamentos del Tarot
+    </a>
+
+    <!-- 2. SIMBOLISMO: PRÓXIMAMENTE -->
+    <a
+      class="zona-curso simbolismo proximamente"
+      href="#"
+      data-curso="Simbolismo y Arquetipos"
+      aria-label="Simbolismo y Arquetipos, próximamente">
+      Simbolismo y Arquetipos
+    </a>
+
+    <!-- 3. ARCANOS MAYORES: PRÓXIMAMENTE -->
+    <a
+      class="zona-curso mayores proximamente"
+      href="#"
+      data-curso="Arcanos Mayores"
+      aria-label="Arcanos Mayores, próximamente">
+      Arcanos Mayores
+    </a>
+
+    <!-- 4. ARCANOS MENORES: PRÓXIMAMENTE -->
+    <a
+      class="zona-curso menores proximamente"
+      href="#"
+      data-curso="Arcanos Menores"
+      aria-label="Arcanos Menores, próximamente">
+      Arcanos Menores
+    </a>
+
+    <!-- 5. EL ARTE DE LA LECTURA: PRÓXIMAMENTE -->
+    <a
+      class="zona-curso lectura proximamente"
+      href="#"
+      data-curso="El Arte de la Lectura"
+      aria-label="El Arte de la Lectura, próximamente">
+      El Arte de la Lectura
+    </a>
+
+    <!-- 6. TAROT PROFESIONAL: PRÓXIMAMENTE -->
+    <a
+      class="zona-curso profesional proximamente"
+      href="#"
+      data-curso="Tarot Profesional"
+      aria-label="Tarot Profesional, próximamente">
+      Tarot Profesional
+    </a>
+
+    <!-- 7. MAESTRÍA: PRÓXIMAMENTE -->
+    <a
+      class="zona-curso maestria proximamente"
+      href="#"
+      data-curso="Maestría Quantum Tarot"
+      aria-label="Maestría Quantum Tarot, próximamente">
+      Maestría Quantum Tarot
+    </a>
+
+  </main>
+
+  <div
+    id="aviso"
+    class="aviso"
+    role="status"
+    aria-live="polite"
+  >
+    <strong id="nombreCurso">Curso</strong>
+    Este nivel de la Academia estará disponible próximamente.
+  </div>
+
+  <script>
+    const aviso = document.getElementById("aviso");
+    const nombreCurso = document.getElementById("nombreCurso");
+
+    let temporizador;
+
+    document
+      .querySelectorAll(".proximamente")
+      .forEach(function (enlace) {
+        enlace.addEventListener("click", function (evento) {
+          evento.preventDefault();
+
+          const curso =
+            enlace.getAttribute("data-curso") ||
+            "Este curso";
+
+          nombreCurso.textContent = curso;
+
+          aviso.classList.add("visible");
+
+          clearTimeout(temporizador);
+
+          temporizador = setTimeout(function () {
+            aviso.classList.remove("visible");
+          }, 3000);
+        });
+      });
+  </script>
 
 </body>
-
 </html>
