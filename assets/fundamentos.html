@@ -597,9 +597,17 @@
         padding: 24px 20px;
       }
 
-      .modulos {
-        grid-template-columns: 1fr;
-      }
+     .modulo-enlace{
+    text-decoration:none;
+    color:inherit;
+    display:block;
+}
+
+.modulo-enlace:hover .modulo{
+    transform:translateY(-5px);
+    border-color:var(--azul);
+    background:rgba(8,31,54,.82);
+}
 
       .dato {
         flex-direction: column;
@@ -710,10 +718,21 @@
 
           <div class="modulos">
 
-            <article class="modulo">
-              <div class="numero">01</div>
-              <h3>Historia y origen del Tarot</h3>
-            </article>
+            <a
+  href="curso_fundamentos.html"
+  class="modulo-enlace"
+  aria-label="Abrir Historia y origen del Tarot"
+>
+
+  <article class="modulo">
+
+    <div class="numero">01</div>
+
+    <h3>Historia y origen del Tarot</h3>
+
+  </article>
+
+</a>
 
             <article class="modulo">
               <div class="numero">02</div>
